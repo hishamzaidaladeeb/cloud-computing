@@ -4,21 +4,29 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="منصة تعليمية ثنائية اللغة للحوسبة السحابية، الشبكات، الأمن، Docker، Terraform ومزودي الخدمات.">
 <title>Cloud Computing | الحوسبة السحابية — جامعة إب</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css"><script defer src="app.js"></script>
+<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="refinements.css"><script defer src="app.js"></script>
 </head>
 <body>
 <header class="topbar">
   <div class="identity"><img src="assets/ibb-university-logo.jpg" alt="شعار جامعة إب" class="university-logo"><div class="university-name"><strong data-i18n="university">جامعة إب</strong><small>Ibb University</small></div><span class="divider"></span><div class="faculty"><strong data-i18n="faculty">كلية الحاسبات والعلوم التطبيقية</strong><small>Faculty of Computers and Applied Sciences</small></div></div>
-  <div class="tools"><span class="globe" aria-hidden="true">◎</span><div class="lang-switch" role="group" aria-label="Language"><button id="arabicBtn" class="active">العربية 🇾🇪</button><button id="englishBtn">English 🇬🇧</button></div><span class="divider"></span><button id="themeBtn" class="theme-btn" aria-label="Toggle light and dark mode" title="Toggle theme"><span id="themeIcon">☀️</span></button></div>
+  <div class="tools"><span class="globe" aria-hidden="true">◎</span><div class="lang-switch" role="group" aria-label="Language"><button id="arabicBtn" class="active">العربية 🇾🇪</button><button id="englishBtn">English 🇬🇧</button></div><span class="divider"></span><button id="themeBtn" class="theme-btn" aria-label="تبديل الوضع اللوني" title="Toggle theme"><span id="themeIcon">☀️</span></button></div>
 </header>
 <div class="layout">
-<aside class="sidebar" id="sidebar"><button class="home-link active" id="homeBtn"><span class="nav-icon">⌂</span><span data-i18n="home">الرئيسية</span></button><div class="side-heading" data-i18n="courseContents">محتويات المنهج</div><nav id="sideNav" aria-label="Course navigation"></nav><button class="glossary-link" id="glossaryBtn"><span class="nav-icon">▤</span><span data-i18n="glossary">قاموس المصطلحات</span><span class="arrow">›</span></button><section class="student-card"><div class="student-symbol">♟</div><strong data-i18n="student">إعداد الطالب</strong><p id="studentName">هشام زيد ثابت حسن الأديب</p><small data-i18n="level">المستوى الرابع — تقنية المعلومات</small><hr><strong data-i18n="supervisor">إشراف الدكتور</strong><p id="doctorName">إياد المخلافي</p><small data-i18n="editableNote">يمكن تعديل البيانات في app.js</small></section>
+<aside class="sidebar" id="sidebar"><button class="home-link active" id="homeBtn"><span class="nav-icon">⌂</span><span data-i18n="home">الرئيسية</span></button><div class="side-heading" data-i18n="courseContents">محتويات المنهج</div><nav id="sideNav" aria-label="Course navigation"></nav><button class="glossary-link" id="glossaryBtn"><span class="nav-icon">▤</span><span data-i18n="glossary">قاموس المصطلحات</span><span class="arrow">›</span></button><section class="student-card"><div class="student-symbol">♟</div><strong data-i18n="student">إعداد الطالب</strong><p id="studentName">هشام زيد ثابت الأديب</p><small data-i18n="level">المستوى الرابع — تقنية المعلومات</small><hr><strong data-i18n="supervisor">إشراف المهندسة</strong><p id="supervisorName">سلمى محمود</p><small data-i18n="editableNote">يمكن تعديل البيانات في app.js</small></section>
 </aside>
 <main class="main-area">
 <div class="topic-strip-wrap"><div class="topic-strip" id="topNav" role="navigation" aria-label="Main topics"></div></div>
 <section id="content" class="content" tabindex="-1" aria-live="polite"></section>
+<section class="profile-section" aria-labelledby="profileHeading">
+  <div class="profile-copy">
+    <p class="profile-kicker" data-i18n="profileKicker">ختام المنصة</p>
+    <h2 id="profileHeading" data-i18n="profileHeading">إعداد الطالب</h2>
+    <p class="profile-name" id="profileStudentName">هشام زيد ثابت الأديب</p>
+    <p class="profile-academic" data-i18n="profileAcademic">جامعة إب · كلية الحاسبات والعلوم التطبيقية · المستوى الرابع — تقنية المعلومات</p>
+    <div class="profile-supervisor"><span data-i18n="supervisor">إشراف المهندسة</span><strong id="profileSupervisorName">سلمى محمود</strong></div>
+  </div>
+  <figure class="profile-photo-frame"><img src="assets/student-profile.jpg" alt="الصورة الشخصية المرفقة للطالب هشام زيد ثابت الأديب" data-i18n-alt="profilePhotoAlt" class="profile-photo" loading="lazy" decoding="async" width="1024" height="1536"><figcaption data-i18n="profileCaption">منصة تعليمية للحوسبة السحابية</figcaption></figure>
+</section>
 <footer class="footer"><div class="footer-left"><span class="footer-mark">☁</span><span data-i18n="footerTag">معرفة أعمق • بنية أقوى • مستقبل أذكى</span></div><span>© 2026 <span data-i18n="facultyShort">كلية الحاسبات والعلوم التطبيقية</span></span></footer>
 </main></div>
 <noscript><p class="noscript">يتطلب هذا الموقع تفعيل JavaScript لعرض الدروس والتنقل بينها.</p></noscript>

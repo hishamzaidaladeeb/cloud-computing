@@ -1,0 +1,69 @@
+/* Small, isolated visual refinements; core lesson layout remains in styles.css. */
+:root {
+  --font-ar: "Segoe UI", Tahoma, Arial, sans-serif;
+  --font-en: Inter, "Segoe UI", Arial, sans-serif;
+  --font-code: Consolas, "Courier New", monospace;
+  --focus-ring: #f0b429;
+}
+
+html { scroll-padding-top: 150px; }
+body { font-family: var(--font-ar); font-size: 15.5px; line-height: 1.82; }
+button, input, select { font-family: inherit; }
+.topbar { box-shadow: 0 2px 10px #061a3426; }
+.university-logo { flex: 0 0 auto; }
+.identity { min-width: 0; }
+.faculty, .university-name { min-width: 0; }
+.faculty strong, .university-name strong { white-space: normal; }
+.topic-strip { scrollbar-gutter: stable; }
+.topic-pill, .home-link, .side-link, .glossary-link, .nav-button,
+.primary-btn, .secondary-btn { transition: background-color .16s ease, border-color .16s ease, color .16s ease, transform .16s ease; }
+.topic-pill:hover, .side-link:hover, .glossary-link:hover, .nav-button:not(:disabled):hover,
+.primary-btn:hover, .secondary-btn:hover { transform: translateY(-1px); }
+.content { width: 100%; }
+.lesson-section, .topic-head, .stat-card, .term-card, .topic-card { box-shadow: 0 2px 7px rgb(18 42 78 / 4%); }
+.lesson-section h2, .section-title, .topic-head h1 { text-wrap: pretty; }
+pre { max-width: 100%; tab-size: 2; }
+code, pre, .mono { font-family: var(--font-code); }
+.profile-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 270px);
+  align-items: center;
+  gap: clamp(20px, 4vw, 44px);
+  margin: 8px auto 28px;
+  padding: clamp(20px, 3vw, 34px);
+  width: min(calc(100% - 44px), 1320px);
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 3px 12px rgb(18 42 78 / 5%);
+}
+.profile-copy { min-width: 0; }
+.profile-kicker { margin: 0 0 6px; color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .04em; }
+.profile-copy h2 { margin: 0 0 8px; font-size: clamp(21px, 2.5vw, 30px); line-height: 1.45; }
+.profile-name { margin: 0; font-size: clamp(17px, 2vw, 22px); font-weight: 800; }
+.profile-academic { margin: 8px 0 18px; color: var(--muted); }
+.profile-supervisor { display: flex; flex-wrap: wrap; align-items: baseline; gap: 7px; padding-top: 13px; border-top: 1px solid var(--border); }
+.profile-supervisor span { color: var(--muted); }
+.profile-supervisor strong { font-weight: 800; }
+.profile-photo-frame { margin: 0; width: 100%; max-width: 270px; justify-self: center; text-align: center; }
+.profile-photo { display: block; width: 100%; height: auto; max-height: 390px; object-fit: contain; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); }
+.profile-photo-frame figcaption { margin-top: 8px; color: var(--muted); font-size: 12px; }
+.footer { flex-wrap: wrap; }
+:focus-visible { outline-color: var(--focus-ring); }
+@media (max-width: 780px) {
+  .profile-section { width: calc(100% - 22px); grid-template-columns: minmax(0, 1fr) minmax(120px, 190px); gap: 16px; padding: 17px; }
+  .profile-photo { max-height: 300px; }
+}
+@media (max-width: 480px) {
+  .profile-section { grid-template-columns: 1fr; }
+  .profile-photo-frame { width: min(100%, 230px); grid-row: 1; }
+  .profile-copy h2 { font-size: 22px; }
+  .profile-academic { font-size: 13px; }
+  .topbar .identity { max-width: 100%; }
+  .university-name strong { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topic-pill, .home-link, .side-link, .glossary-link, .nav-button,
+  .primary-btn, .secondary-btn { transition: none; }
+}
