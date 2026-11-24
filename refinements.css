@@ -1,69 +1,139 @@
-/* Small, isolated visual refinements; core lesson layout remains in styles.css. */
-:root {
-  --font-ar: "Segoe UI", Tahoma, Arial, sans-serif;
-  --font-en: Inter, "Segoe UI", Arial, sans-serif;
-  --font-code: Consolas, "Courier New", monospace;
-  --focus-ring: #f0b429;
+/* Final UI refinement layer. Original lesson data and core styles remain intact. */
+:root{--font-ar:"IBM Plex Sans Arabic","Noto Sans Arabic","Cairo",Tahoma,sans-serif;--font-en:Inter,Arial,sans-serif;--font-mono:"JetBrains Mono",Consolas,monospace;--focus:#f2b72d}
+body{font-family:var(--font-ar);font-size:clamp(14px,.92rem + .12vw,16px);line-height:1.82;overflow-x:clip}
+button,input,select{font-family:inherit}
+.topbar{min-height:88px;height:auto;flex-wrap:nowrap}
+.identity,.tools{flex-shrink:1}
+.university-name strong,.faculty strong{line-height:1.55;white-space:normal}
+.content,.lesson-body,.lesson-section,.topic-head,.term-card{min-width:0}
+.lesson-section p,.lesson-section li,.topic-head p,.term-card p{overflow-wrap:anywhere}
+.menu-toggle{display:none;align-items:center;justify-content:center;flex-direction:column;gap:5px;width:42px;height:42px;flex:0 0 42px;border:1px solid #ffffff55;border-radius:10px;background:#ffffff12;color:#fff}
+.menu-toggle span{width:19px;height:2px;background:currentColor;border-radius:2px}
+.drawer-backdrop{display:none}
+/* Readable code blocks with a stable dark palette in both site themes. */
+.code-block{margin:14px 0;min-width:0;border:1px solid #263b5b;border-radius:12px;overflow:hidden;background:#081426}
+.code-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;background:#102541;border-bottom:1px solid #294363}
+.code-toolbar .code-label{margin:0;color:#d9e8ff;font:600 12px var(--font-ar);min-width:0}
+.copy-code{flex:0 0 auto;border:1px solid #54749b;background:#1c3d65;color:#fff;border-radius:7px;padding:6px 11px;font-size:12px;font-weight:700}
+.copy-code:hover{background:#285582}
+.code-block pre{margin:0!important;border:0!important;border-radius:0!important;background:#081426!important;color:#e8f1ff!important;padding:16px!important;max-width:100%;overflow:auto;font:13px/1.8 var(--font-mono)!important;white-space:pre;tab-size:2;direction:ltr!important;text-align:left;unicode-bidi:plaintext;scrollbar-width:thin}
+.code-block pre code{display:block;background:transparent!important;color:#e8f1ff!important;padding:0!important;font:inherit!important;white-space:pre;direction:ltr!important;unicode-bidi:plaintext;user-select:text}
+.copy-status{display:block;min-height:0;padding:0 12px;color:#9ce5c2;font-size:11px}
+.copy-status:not(:empty){padding-bottom:7px}
+code,.mono{font-family:var(--font-mono);direction:ltr;unicode-bidi:plaintext;overflow-wrap:normal}
+.lesson-section code:not(pre code){background:color-mix(in srgb,var(--blue) 12%,var(--panel));color:var(--text);padding:.12em .35em}
+.diagram{min-width:0;max-width:100%;background:color-mix(in srgb,var(--blue) 4%,var(--panel))}
+.diagram svg{min-width:0;width:100%;height:auto;max-height:none;overflow:visible}
+.diagram:has(svg[viewBox="0 0 640 410"]) svg{min-width:620px}
+.author-portrait{display:flex;align-items:center;justify-content:center;gap:18px;padding:22px;background:var(--panel);border-top:1px solid var(--border);color:var(--text)}
+.author-portrait img{width:92px;height:118px;object-fit:cover;object-position:center 24%;border-radius:12px;border:2px solid var(--border)}
+.author-portrait div{display:flex;flex-direction:column;gap:3px}.author-portrait strong{font-size:14px;color:var(--blue)}.author-portrait span{font-weight:800}.author-portrait small{color:var(--muted)}
+/* More robust mixed-script layout. */
+[dir="ltr"] .university-name,[dir="ltr"] .faculty{direction:ltr}
+.english-title,.subhead,.term-en,.source-list a{font-family:var(--font-en);unicode-bidi:isolate}
+button,a{touch-action:manipulation}
+@media(max-width:780px){
+ .topbar{position:sticky;top:0;z-index:50;min-height:74px;padding:8px 10px;align-items:center;gap:8px;background:var(--navy)}
+ .identity{flex:1;min-width:0;gap:8px}.university-logo{width:40px;height:48px;flex:0 0 40px}.university-name strong{font-size:12px}.university-name small{font-size:9px}.faculty{display:none}.identity>.divider{display:none}
+ .menu-toggle{display:flex;order:0}.tools{margin-inline-start:0;gap:4px;flex:0 0 auto}.globe{display:none}.lang-switch{gap:1px}.lang-switch button{padding:6px 8px;font-size:10px}.theme-btn{font-size:20px;padding:5px}
+ .layout{display:block;min-height:calc(100vh - 74px)}
+ .sidebar{position:fixed;inset-block:74px 0;inset-inline-start:0;top:74px;width:min(84vw,330px);height:calc(100dvh - 74px);max-height:none;overflow-y:auto;overscroll-behavior:contain;z-index:70;padding:14px;background:var(--panel);border:0;border-inline-end:1px solid var(--border);box-shadow:0 12px 32px #0003;transform:translateX(-110%);transition:transform .22s ease}
+ [dir="rtl"] .sidebar{transform:translateX(110%)}
+ body.drawer-open .sidebar{transform:translateX(0)}
+ .drawer-backdrop:not([hidden]){display:block;position:fixed;inset:74px 0 0;background:#07132688;z-index:60}
+ .home-link,.side-link,.glossary-link{width:100%;display:flex;min-height:48px;margin:0 0 8px;padding:10px 12px;font-size:13px}
+ .side-link small,.side-heading,.student-card{display:block}.side-link small{font-size:11px}.arrow{display:inline;margin-inline-start:auto}
+ .topic-strip-wrap{top:74px;z-index:30}.content{padding:13px 11px 22px}
+ .diagram svg{min-width:0}.diagram:has(svg[viewBox="0 0 640 410"]) {overflow-x:auto}
 }
+@media(max-width:480px){.university-name small{display:none}.tools{gap:2px}.lang-switch button{padding:5px 6px;font-size:9px}.theme-btn{font-size:18px}.menu-toggle{width:38px;height:38px;flex-basis:38px}.author-portrait{padding:16px}.author-portrait img{width:74px;height:96px}.code-block pre{font-size:11px!important;padding:12px!important}.code-toolbar{padding:7px 9px}}
+@media(min-width:781px){.sidebar{height:calc(100vh - 88px);overflow-y:auto}.menu-toggle{display:none}}
+@media(prefers-reduced-motion:reduce){.sidebar{transition:none}}
+.diagram svg{min-width:530px;width:100%;height:auto;max-height:none}
+.diagram:has(svg[viewBox="0 0 640 410"]) svg{min-width:640px}
+.tok-keyword{color:#82b7ff;font-weight:700}.tok-string{color:#a8e6b4}.tok-comment{color:#91a4bd;font-style:italic}.tok-number{color:#f2c879}
 
-html { scroll-padding-top: 150px; }
-body { font-family: var(--font-ar); font-size: 15.5px; line-height: 1.82; }
-button, input, select { font-family: inherit; }
-.topbar { box-shadow: 0 2px 10px #061a3426; }
-.university-logo { flex: 0 0 auto; }
-.identity { min-width: 0; }
-.faculty, .university-name { min-width: 0; }
-.faculty strong, .university-name strong { white-space: normal; }
-.topic-strip { scrollbar-gutter: stable; }
-.topic-pill, .home-link, .side-link, .glossary-link, .nav-button,
-.primary-btn, .secondary-btn { transition: background-color .16s ease, border-color .16s ease, color .16s ease, transform .16s ease; }
-.topic-pill:hover, .side-link:hover, .glossary-link:hover, .nav-button:not(:disabled):hover,
-.primary-btn:hover, .secondary-btn:hover { transform: translateY(-1px); }
-.content { width: 100%; }
-.lesson-section, .topic-head, .stat-card, .term-card, .topic-card { box-shadow: 0 2px 7px rgb(18 42 78 / 4%); }
-.lesson-section h2, .section-title, .topic-head h1 { text-wrap: pretty; }
-pre { max-width: 100%; tab-size: 2; }
-code, pre, .mono { font-family: var(--font-code); }
-.profile-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(190px, 270px);
-  align-items: center;
-  gap: clamp(20px, 4vw, 44px);
-  margin: 8px auto 28px;
-  padding: clamp(20px, 3vw, 34px);
-  width: min(calc(100% - 44px), 1320px);
-  color: var(--text);
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 0 3px 12px rgb(18 42 78 / 5%);
+/* Final correction layer: locally bundled typography, virtualization diagram,
+   portrait presentation, and consistent controls. */
+@font-face{font-family:"Noto Sans Arabic Local";src:url("assets/fonts/NotoSansArabic-Regular.ttf") format("truetype");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:"Noto Sans Arabic Local";src:url("assets/fonts/NotoSansArabic-Bold.ttf") format("truetype");font-style:normal;font-weight:700;font-display:swap}
+@font-face{font-family:"Inter Local";src:url("assets/fonts/Inter-Regular.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:"Inter Local";src:url("assets/fonts/Inter-Medium.otf") format("opentype");font-style:normal;font-weight:500;font-display:swap}
+@font-face{font-family:"Inter Local";src:url("assets/fonts/Inter-SemiBold.otf") format("opentype");font-style:normal;font-weight:600;font-display:swap}
+@font-face{font-family:"Inter Local";src:url("assets/fonts/Inter-Bold.otf") format("opentype");font-style:normal;font-weight:700;font-display:swap}
+@font-face{font-family:"Local Mono";src:url("assets/fonts/DejaVuSansMono.ttf") format("truetype");font-style:normal;font-weight:400;font-display:swap}
+:root{--font-ar:"Noto Sans Arabic Local",Tahoma,sans-serif;--font-en:"Inter Local",Arial,sans-serif;--font-mono:"Local Mono",Consolas,monospace}
+html{font-size:16px;text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body,button,input,select,textarea{font-family:var(--font-ar)}
+body{font-size:clamp(15px,.94rem + .12vw,17px);line-height:1.85;letter-spacing:0}
+button{font-weight:600;line-height:1.45}
+:where(button,a,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #f0b429;outline-offset:3px}
+:where(h1,h2,h3,p,li,td,th){overflow-wrap:anywhere}
+[dir="ltr"],.english-title,.subhead,.term-en,.source-list a{font-family:var(--font-en);unicode-bidi:isolate}
+code,pre,.mono,.code-block pre,.code-block pre code{font-family:var(--font-mono)!important}
+/* The virtualization drawing is HTML/CSS rather than a fixed-size SVG so it
+   reflows into one column on narrow screens without clipping or tiny labels. */
+.virtualization-diagram{overflow:visible;padding:clamp(14px,2vw,24px);background:var(--panel)}
+.virtualization-diagram .virtual-layer{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;text-align:center;border:1px solid #6aa9e8;border-radius:13px;padding:13px 16px;color:#fff}
+.virtualization-diagram .virtual-layer strong{font-size:clamp(17px,1.6vw,21px);font-weight:800;line-height:1.5}
+.virtualization-diagram .virtual-layer span{font:600 clamp(13px,1.2vw,16px)/1.5 var(--font-en);direction:ltr}
+.hardware-layer{background:#354c69}
+.hypervisor-layer{background:#164d8e}
+.virtual-link{height:25px;display:flex;justify-content:center;position:relative}
+.virtual-link span{height:100%;width:2px;background:#d7a82d;position:relative}
+.virtual-link span::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#d7a82d;border-bottom:0}
+.virtual-branch{height:35px;position:relative;display:flex;justify-content:center}
+.virtual-branch::before{content:"";position:absolute;top:0;left:16.66%;right:16.66%;height:1px;background:#d7a82d}
+.virtual-branch span{width:2px;height:100%;background:#d7a82d;position:relative}
+.virtual-branch span::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#d7a82d;border-bottom:0}
+.vm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.5vw,18px);align-items:stretch}
+.vm-card{min-width:0;border:1.5px solid #5596d5;border-radius:14px;background:#102f55;padding:13px;display:flex;flex-direction:column;gap:11px;color:#fff;position:relative}
+.vm-card::before{content:"";position:absolute;top:-36px;left:50%;height:35px;width:2px;background:#d7a82d}
+.vm-heading{display:flex;align-items:center;gap:10px;min-height:54px;padding-bottom:8px;border-bottom:1px solid #ffffff35}
+.vm-number{display:grid;place-items:center;flex:0 0 38px;height:38px;border-radius:10px;background:#245b92;color:#fff;font:700 14px var(--font-en)}
+.vm-heading div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.vm-heading b{font:700 clamp(13px,1.1vw,16px)/1.45 var(--font-en);direction:ltr;text-align:start;overflow-wrap:normal}
+.vm-heading span:not(.vm-number){font-size:13px;font-weight:700;direction:rtl;line-height:1.5}
+.vm-layer{min-height:78px;border-radius:10px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center}
+.vm-layer b{font-size:clamp(13px,1.05vw,15px);line-height:1.6}
+.vm-layer span{font:600 clamp(12px,.95vw,14px)/1.5 var(--font-en);direction:ltr}
+.guest-layer{background:#1b5d96;border:1px solid #5aa6e9}
+.app-layer{background:#155b4b;border:1px solid #58b99e}
+.virtualization-diagram figcaption{font-size:13px;line-height:1.8;margin-top:16px}
+/* Keep the original portrait file and its full 2:3 aspect ratio. The orbit is
+   an independent decorative ring; the photograph itself never rotates. */
+.author-portrait{display:flex;align-items:center;justify-content:center;gap:30px;padding:32px 22px;min-height:340px}
+.portrait-orbit{position:relative;isolation:isolate;flex:0 0 auto;width:210px;height:300px;display:grid;place-items:center}
+.portrait-orbit::before{content:"";position:absolute;inset:-8px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 66%,#43b9ef 73%,#f0bd43 79%,transparent 87% 100%);mask:radial-gradient(closest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));-webkit-mask:radial-gradient(closest-side,transparent calc(100% - 3px),#000 calc(100% - 2px));animation:portrait-orbit-spin 24s linear infinite;z-index:-1}
+.portrait-orbit img{display:block;width:184px;height:276px;max-width:none;object-fit:contain;object-position:center;border-radius:18px;border:2px solid var(--border);box-shadow:0 8px 28px #07132635;background:var(--panel)}
+.portrait-orbit:hover::before{animation-play-state:paused}
+.portrait-copy{display:flex;flex-direction:column;gap:8px;max-width:440px}
+.portrait-copy strong{font-size:15px;color:var(--blue)}
+.portrait-copy span{font-size:clamp(20px,2.2vw,28px);font-weight:800;line-height:1.6}
+.portrait-copy small{font-size:14px;color:var(--muted);line-height:1.8}
+@keyframes portrait-orbit-spin{to{transform:rotate(360deg)}}
+/* Touch-friendly and consistent button states. */
+button,.primary-btn,.secondary-btn,.nav-button,.copy-code{min-height:40px;transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .16s ease}
+button:active{transform:translateY(1px)}
+.copy-code{min-height:36px;padding:7px 13px}
+@media(max-width:780px){
+ .vm-grid{grid-template-columns:1fr;gap:14px}
+ .virtual-branch{height:20px}
+ .virtual-branch::before{display:none}
+ .vm-card::before{top:-21px;height:20px}
+ .vm-card{padding:14px}
+ .vm-layer{min-height:72px}
+ .author-portrait{gap:22px;padding:28px 16px;min-height:0}
+ .portrait-orbit{width:174px;height:252px}
+ .portrait-orbit img{width:154px;height:231px}
 }
-.profile-copy { min-width: 0; }
-.profile-kicker { margin: 0 0 6px; color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .04em; }
-.profile-copy h2 { margin: 0 0 8px; font-size: clamp(21px, 2.5vw, 30px); line-height: 1.45; }
-.profile-name { margin: 0; font-size: clamp(17px, 2vw, 22px); font-weight: 800; }
-.profile-academic { margin: 8px 0 18px; color: var(--muted); }
-.profile-supervisor { display: flex; flex-wrap: wrap; align-items: baseline; gap: 7px; padding-top: 13px; border-top: 1px solid var(--border); }
-.profile-supervisor span { color: var(--muted); }
-.profile-supervisor strong { font-weight: 800; }
-.profile-photo-frame { margin: 0; width: 100%; max-width: 270px; justify-self: center; text-align: center; }
-.profile-photo { display: block; width: 100%; height: auto; max-height: 390px; object-fit: contain; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); }
-.profile-photo-frame figcaption { margin-top: 8px; color: var(--muted); font-size: 12px; }
-.footer { flex-wrap: wrap; }
-:focus-visible { outline-color: var(--focus-ring); }
-@media (max-width: 780px) {
-  .profile-section { width: calc(100% - 22px); grid-template-columns: minmax(0, 1fr) minmax(120px, 190px); gap: 16px; padding: 17px; }
-  .profile-photo { max-height: 300px; }
+@media(max-width:480px){
+ .author-portrait{flex-direction:column;text-align:center;gap:18px;padding:28px 14px}
+ .portrait-orbit{width:180px;height:258px}
+ .portrait-orbit img{width:158px;height:237px}
+ .portrait-copy{align-items:center}
+ .vm-heading b{font-size:15px}
+ .vm-layer b{font-size:14px}
+ .vm-layer span{font-size:13px}
 }
-@media (max-width: 480px) {
-  .profile-section { grid-template-columns: 1fr; }
-  .profile-photo-frame { width: min(100%, 230px); grid-row: 1; }
-  .profile-copy h2 { font-size: 22px; }
-  .profile-academic { font-size: 13px; }
-  .topbar .identity { max-width: 100%; }
-  .university-name strong { font-size: 12px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .topic-pill, .home-link, .side-link, .glossary-link, .nav-button,
-  .primary-btn, .secondary-btn { transition: none; }
-}
+@media(prefers-reduced-motion:reduce){.portrait-orbit::before{animation:none!important}.author-portrait *{transition:none!important}}

@@ -1,27 +1,44 @@
-# Test and verification report
+# TEST_REPORT — Final correction pass
 
-## Checks performed in this workspace
+## Project basis
+- Source: the previously refined `Cloud-Computing-Professional-Refined.zip`.
+- The original archive did not contain a standalone portrait file; the refined project already contained the user-supplied portrait at `assets/student-portrait.png`. This exact image file was retained without recompression or pixel edits.
+- The requested section is identified in the source as **المحاكاة الافتراضية / Virtualization** (topic id `virtualization`). No section literally named «المحاكاة البشرية» exists in the current source.
 
-- [x] Inspected the supplied ZIP structure and retained the original project files and learning content.
-- [x] Added the supplied student photograph to `assets/student-profile.jpg`, preserving the original 1024×1536 aspect ratio and avoiding a crop; JPEG optimization reduced its size to approximately 353 KB.
-- [x] Added a responsive closing profile section after the educational content and before the footer.
-- [x] Updated the academic identity labels for the student and supervisor in Arabic and English.
-- [x] Added an isolated `refinements.css` file so most original layout and lesson styles remain intact.
-- [x] Removed the Google Fonts network dependency; the site now uses local system-font stacks and remains usable without an internet connection.
-- [x] `node --check app.js` passed.
-- [x] Checked local resource paths referenced by HTML/CSS and confirmed the expected files exist.
-- [x] Parsed CSS with `tinycss2`; no CSS parse errors were reported.
-- [x] Started a local HTTP server and checked HTTP responses for the page, stylesheets, JavaScript, university emblem, and profile photo.
-- [x] Checked that the image remains 1024×1536 and that its displayed CSS uses `width: 100%`, `height: auto`, and `object-fit: contain`.
+## Changes made
+1. Replaced the virtualization diagram rendered inside the existing `virtualization` lesson with responsive semantic HTML/CSS. It contains Physical Hardware, Hypervisor, and three separate VM cards; each VM contains Guest Operating System and Applications. Arabic and English are separate text nodes with explicit `dir` values. The old fixed-width SVG branch is no longer used for this topic.
+2. Changed the VM diagram from a fixed 640px-wide drawing to a three-column desktop layout and a one-column mobile layout. Connector lines occupy their own layout space and do not cross labels.
+3. Restored a larger portrait presentation at the end of the site. The source image remains 1024×1536 and is displayed with `object-fit: contain` and explicit intrinsic dimensions.
+4. Added a decorative rotating elliptical orbit around the still portrait. Hover pauses the orbit; `prefers-reduced-motion` disables it. The photograph itself does not rotate, crop, or receive filters.
+5. Bundled local Noto Sans Arabic, Inter, and DejaVu Sans Mono fonts with license/copyright notices. Removed dependency on external font delivery for these font families.
+6. Fixed the Escape-key interaction so closing the mobile drawer no longer triggers a second key handler that navigates the user back to Home. Added background scroll locking while the drawer is open.
+7. Improved focus-visible states and touch target sizing.
 
-## Not verified / limitations
+## Tests performed
+| Test | Result | Evidence / scope |
+|---|---|---|
+| JavaScript syntax | PASS | `node --check app.js` |
+| HTML parse | PASS | Python `HTMLParser` parse of `index.html` |
+| CSS parse | PASS | `tinycss2` parser; no parse-error tokens in stylesheets |
+| Local font files | PASS | All `@font-face` targets exist; license files included |
+| Portrait integrity | PASS | SHA-256 matches the supplied image byte-for-byte; 1024×1536 RGBA |
+| Referenced local assets | PASS | Local HTML/CSS/JS/font/image paths exist |
+| Topic data preservation | PASS | Existing topic IDs and lesson data retained; only diagram renderer and interaction logic changed |
+| Responsive rules | PASS (static) | Desktop 3-column and mobile 1-column rules exist at the configured breakpoints |
+| Browser visual/interactions | NOT COMPLETED | Playwright/Chromium navigation was blocked by the environment (`ERR_BLOCKED_BY_ADMINISTRATOR` for local HTTP and file URLs); no visual pass is claimed |
+| Clipboard interaction | NOT VERIFIED | Browser interaction unavailable; copy handler remains in place and was not rewritten in this pass |
+| Theme/language persistence | NOT VERIFIED in browser | Existing localStorage code preserved; browser runtime could not be launched |
+| GitHub Pages live deployment | NOT TESTED | No repository credentials or deployment performed |
 
-- [ ] Chromium is installed, but headless startup/dump attempts timed out in this environment. Therefore, real click-by-click browser interaction, DevTools Console inspection, and screenshot-based visual verification could not be completed.
-- [ ] No automated Playwright interaction tests were run because Playwright is not installed in the environment.
-- [ ] WCAG 2.2 AA contrast ratios were not measured with an automated accessibility analyzer.
-- [ ] GitHub Pages deployment was not performed; deployment steps are documented in `README.md`.
-- [ ] Real browser rendering should still be checked at 360px, 390px, 768px, 1024px, and 1366px before considering the visual QA complete.
+## Important limitations
+- The browser environment blocked opening the local website, so screenshots, viewport interaction checks, computed layout measurements, Console inspection, and actual clipboard tests could not be completed.
+- The responsive diagram is implemented to reflow structurally, but the final rendered appearance must still be checked in a normal browser at 320, 375, 425, 768, 1024, 1366, and 1920px.
+- The project source has no separate UI section named «المحاكاة البشرية». The corrected diagram is inside the existing **المحاكاة الافتراضية / Virtualization** topic.
 
-## Status
-
-The updated static files pass JavaScript syntax, CSS parsing, and local resource checks. The supplied photograph and bilingual academic profile section are included. This report does not claim that browser-level interaction tests or live GitHub Pages deployment succeeded.
+## Editorial pass added
+- Reviewed the Arabic/English text structure across the 13 existing topics, including headings, explanatory paragraphs, tables, lists, code notes, review questions, and glossary labels.
+- Revised wording where it was compressed or ambiguous, especially the distinctions between Virtualization and Cloud Computing, Docker Image and Container, Compose and Kubernetes, and Docker port mapping. Technical code samples and reference URLs were preserved.
+- Updated the academic identity to **هشام زيد ثابت الأديب** and supervisor **المهندسة سلمى محمود** in the visible identity block and language data.
+- Added `EDITORIAL_REVIEW.md` to document scope, examples, and editorial limitations.
+- Re-ran `node --check app.js`, HTML parsing, CSS parsing, local asset-path checks, and topic-count verification after the editorial changes: all passed.
+- This pass does not claim external academic peer review or automated detection-proof writing. Browser visual tests remain subject to the previously stated environment restriction.
